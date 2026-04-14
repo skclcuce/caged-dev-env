@@ -1,3 +1,5 @@
+**🇰🇷 [한국어](README-ko.md)**
+
 # 🗄️ caged-dev-env
 
 > **A single-script K3s development environment that structurally prevents unintended system manipulation by AI agents**
