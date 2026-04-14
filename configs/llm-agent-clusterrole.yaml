@@ -1,0 +1,46 @@
+# LLM 에이전트 읽기 전용 ClusterRole
+# 에이전트가 할 수 있는 것과 할 수 없는 것을 선언적으로 정의한다.
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: llm-agent-readonly
+  labels:
+    app.kubernetes.io/component: ai-agent
+rules:
+  # 워크로드 상태 조회 (읽기 전용)
+  - apiGroups: [""]
+    resources: ["pods", "services", "endpoints", "events", "configmaps", "persistentvolumeclaims"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "replicasets", "daemonsets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses", "networkpolicies"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["traefik.io", "traefik.containo.us"]
+    resources: ["ingressroutes", "middlewares"]
+    verbs: ["get", "list", "watch"]
+  # 파드 로그만 허용 (exec/attach 의도적 제외)
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]
+  # 네임스페이스 목록
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list"]
+  # ArgoCD Application 상태 조회
+  - apiGroups: ["argoproj.io"]
+    resources: ["applications", "applicationsets"]
+    verbs: ["get", "list", "watch"]
+  # cert-manager 상태 조회
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests", "issuers", "clusterissuers"]
+    verbs: ["get", "list", "watch"]
+  # Velero 상태 조회
+  - apiGroups: ["velero.io"]
+    resources: ["backups", "schedules", "restores"]
+    verbs: ["get", "list", "watch"]
+  # ⛔ 의도적 미포함 = 완전 차단:
+  #   secrets, pods/exec, pods/attach, nodes,
+  #   clusterroles, clusterrolebindings, 모든 create/update/delete

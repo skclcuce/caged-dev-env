@@ -1,0 +1,26 @@
+[Unit]
+Description=Vault Agent — LLM K8s Dynamic Auth
+After=network-online.target
+Wants=network-online.target
+
+# 무한 재시작 방지: 300초 내 5번 실패 시 중단
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bao agent -config=%h/.config/llm-agent/vault-agent.hcl
+Restart=on-failure
+RestartSec=10
+
+# 보안: 토큰은 /dev/shm에만 존재, 디스크 미기록
+Environment=BAO_ADDR=https://<YOUR_VAULT_DOMAIN>
+
+# Max TTL(1h) 초과 시 Agent가 자체 종료됨 (exit_on_retry_failure=true)
+# → systemd가 재시작 시도 → SecretID 만료로 AppRole 재인증 실패
+# → ignite-llm.sh 재점화 필요 (사람의 OIDC 인증 후 새 SecretID 발급)
+
+TimeoutStopSec=5
+
+[Install]
+WantedBy=default.target
