@@ -1,4 +1,6 @@
-**🇰🇷 [한국어](README-ko.md)**
+<div align="right">
+  <b>🇺🇸 English</b> | <a href="README-ko.md">🇰🇷 한국어</a>
+</div>
 
 # 🗄️ caged-dev-env
 
