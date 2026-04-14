@@ -38,7 +38,7 @@ Once inputs are provided, the script automatically:
 - Registers Git remotes (human `git-admin` + LLM-specific `git-llm`)
 - Configures Git defaults (handles fresh machines with no prior config)
 - OIDC authentication → ignition → issues 1-hour TTL dynamic K8s token
-- Auto-issues LLM SSH CA certificate (`valid_principals: llm-agent,llm-bot`)
+- Auto-issues LLM SSH CA certificate (`valid_principals: llm-agent,llm-bot` — server SSH and Forgejo Git served by a single certificate)
 - **E2E automated verification**: kubectl access, RBAC denial, auth identity, git push dry-run (4/4 pass)
 
 When done, run `teardown.sh` for a clean teardown.

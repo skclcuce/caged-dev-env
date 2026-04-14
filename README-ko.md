@@ -38,7 +38,7 @@ bash /tmp/bootstrap.sh
 - Git remote 자동 등록 (사람용 `git-admin` + LLM 전용 `git-llm`)
 - Git config 기본값 설정 (초기 상태의 PC 대응)
 - OIDC 인증 → 점화(ignition) → 1시간 TTL 동적 K8s 토큰 발급
-- LLM SSH CA 인증서 자동 발급 (`valid_principals: llm-agent,llm-bot`)
+- LLM SSH CA 인증서 자동 발급 (`valid_principals: llm-agent,llm-bot` — 서버 SSH와 Forgejo Git을 단일 인증서로 충족)
 - **E2E 자동 검증**: kubectl 접근, RBAC 차단, 인증 identity, git push dry-run (4/4 통과)
 
 작업이 끝나면 `teardown.sh`로 남는 파일 없이 깔끔하게 철수합니다.
