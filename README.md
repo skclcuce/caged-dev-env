@@ -4,12 +4,12 @@
 
 # 🗄️ caged-dev-env
 
-> **A single-script K3s development environment that structurally prevents unintended system manipulation by AI agents**
+> **A single-script K3s development environment that uses structural controls to limit unintended system manipulation by AI agents.**
 
 Environment: Oracle Cloud Always-Free ARM instance (4 OCPU, 24 GB RAM) + Synology NAS (backup/storage)
-Goal: Build a K3s infrastructure that operates securely over the public internet without a VPN. Grant LLM coding agents conditional access to infrastructure controls while structurally preventing unintended system manipulation.
+Goal: Build a K3s infrastructure that can operate over the public internet without a VPN, while granting LLM coding agents conditional access to infrastructure controls under constrained authentication and authorization paths.
 
-> ⚠️ **This repository is a sanitized showcase version with all secrets removed.** The production codebase is managed on a self-hosted Forgejo instance. All placeholders (`<YOUR_...>`) are intentionally masked.
+> ⚠️ **This repository is a sanitized showcase version with all secrets removed.** The production codebase is managed on a self-hosted Forgejo instance. All placeholders (<YOUR_...>) are intentionally masked.
 
 ---
 
